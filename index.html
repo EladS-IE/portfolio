@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050810;--surface:#0c1020;--surface2:#111827;
+  --border:rgba(99,179,237,0.12);--bh:rgba(99,179,237,0.35);
+  --accent:#63b3ed;--accent2:#9f7aea;--accent3:#68d391;
+  --red-bg:rgba(239,68,68,0.04);--red-b:rgba(239,68,68,0.18);--red-c:rgba(239,68,68,0.55);
+  --text:#e2e8f0;--tm:#718096;--td:#4a5568;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;font-weight:300;overflow-x:hidden;line-height:1.6;}
+body::before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(99,179,237,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(99,179,237,0.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
+.orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0;}
+.orb1{width:500px;height:500px;background:rgba(99,179,237,0.055);top:-100px;right:-100px;}
+.orb2{width:400px;height:400px;background:rgba(159,122,234,0.04);bottom:20%;left:-100px;}
+
+#eb{display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(99,179,237,0.15);border-bottom:1px solid var(--accent);padding:.55rem 2rem;text-align:center;font-size:.75rem;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;backdrop-filter:blur(10px);}
+#eb.on{display:block;}
+#et{position:fixed;bottom:2rem;right:2rem;z-index:9998;width:40px;height:40px;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--td);font-size:.95rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;opacity:.15;}
+#et:hover{opacity:1;border-color:var(--accent);color:var(--accent);}
+#et.on{opacity:1;border-color:var(--accent);color:var(--bg);background:var(--accent);}
+body.em [data-e]{outline:1px dashed rgba(99,179,237,.4);border-radius:2px;cursor:text;min-height:1em;}
+body.em [data-e]:focus{outline:1px solid var(--accent);background:rgba(99,179,237,.04);}
+body.em [data-e]:empty::before{content:attr(data-p);color:var(--td);font-style:italic;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,8,16,.9);backdrop-filter:blur(20px);}
+.nl{font-family:"Outfit",sans-serif;font-size:1rem;font-weight:600;letter-spacing:.04em;color:var(--text);outline:none;}
+nav ul{display:flex;gap:2.5rem;list-style:none;}
+nav a{color:var(--tm);text-decoration:none;font-size:.82rem;letter-spacing:.04em;transition:color .2s;}
+nav a:hover{color:var(--accent);}
+.nc{padding:.5rem 1.25rem;border:1px solid var(--border);color:var(--accent)!important;border-radius:4px;transition:all .2s!important;}
+.nc:hover{background:rgba(99,179,237,.08)!important;border-color:var(--accent)!important;}
+
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 360px;gap:4rem;align-items:center;padding:8rem 5rem 4rem;position:relative;z-index:1;}
+.hb{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .85rem;border:1px solid var(--border);border-radius:100px;font-size:.72rem;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:2rem;background:rgba(99,179,237,.05);}
+.hb::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent3);animation:pulse 2s infinite;flex-shrink:0;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+h1{font-family:"Outfit",sans-serif;font-size:clamp(2.4rem,5vw,4.2rem);font-weight:600;line-height:1.1;letter-spacing:-.01em;margin-bottom:1.5rem;}
+.gr{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:700;}
+.hs{font-size:1rem;color:var(--tm);max-width:480px;margin-bottom:2.5rem;line-height:1.8;}
+.ha{display:flex;gap:1rem;flex-wrap:wrap;}
+.bp{padding:.75rem 1.75rem;background:var(--accent);color:var(--bg);border:none;border-radius:4px;font-family:"DM Sans",sans-serif;font-size:.85rem;font-weight:500;cursor:pointer;text-decoration:none;transition:all .2s;}
+.bp:hover{background:#90cdf4;transform:translateY(-1px);}
+.bg{padding:.75rem 1.75rem;background:transparent;color:var(--tm);border:1px solid var(--border);border-radius:4px;font-family:"DM Sans",sans-serif;font-size:.85rem;cursor:pointer;text-decoration:none;transition:all .2s;}
+.bg:hover{border-color:var(--bh);color:var(--text);}
+
+.pf{width:100%;aspect-ratio:3/4;border:1px solid var(--border);border-radius:8px;background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;cursor:pointer;transition:border-color .3s;overflow:hidden;position:relative;}
+.pf:hover{border-color:var(--bh);}
+.pf img{width:100%;height:100%;object-fit:cover;display:none;position:absolute;inset:0;}
+.pp{display:flex;flex-direction:column;align-items:center;gap:.75rem;}
+.pi{width:52px;height:52px;border:1px dashed rgba(99,179,237,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;}
+.pp p{font-size:.72rem;color:var(--td);letter-spacing:.1em;text-transform:uppercase;text-align:center;}
+.pf input{position:absolute;inset:0;opacity:0;cursor:pointer;}
+.pc{position:absolute;width:16px;height:16px;}
+.tl{top:8px;left:8px;border-top:1px solid var(--accent);border-left:1px solid var(--accent);}
+.tr{top:8px;right:8px;border-top:1px solid var(--accent);border-right:1px solid var(--accent);}
+.bl{bottom:8px;left:8px;border-bottom:1px solid var(--accent);border-left:1px solid var(--accent);}
+.br{bottom:8px;right:8px;border-bottom:1px solid var(--accent);border-right:1px solid var(--accent);}
+
+.sr{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:0 5rem;position:relative;z-index:1;}
+.si{background:var(--surface);padding:1.75rem;text-align:center;transition:background .2s;}
+.si:hover{background:var(--surface2);}
+.sn{font-family:"Outfit",sans-serif;font-size:2rem;font-weight:700;color:var(--accent);line-height:1;margin-bottom:.4rem;}
+.sl{font-size:.7rem;color:var(--td);letter-spacing:.08em;text-transform:uppercase;}
+
+s2{position:relative;z-index:1;display:block;}
+.sec{padding:5rem 5rem;}
+.alt{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.ey{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem;font-weight:500;}
+.st{font-family:"Outfit",sans-serif;font-size:clamp(1.6rem,2.8vw,2.4rem);font-weight:600;letter-spacing:-.01em;margin-bottom:3rem;line-height:1.25;}
+.st .d{color:var(--td);}
+
+.ag{display:grid;grid-template-columns:1.2fr 1fr;gap:5rem;align-items:start;}
+.at p{color:var(--tm);margin-bottom:1.25rem;font-size:.95rem;line-height:1.85;}
+.at strong{color:var(--accent);font-weight:500;}
+.hs2{display:flex;flex-direction:column;gap:.85rem;}
+.hi{display:flex;align-items:flex-start;gap:1rem;padding:1.1rem;border:1px solid var(--border);border-radius:6px;background:var(--bg);transition:border-color .2s;}
+.hi:hover{border-color:var(--bh);}
+.hd{width:8px;height:8px;border-radius:50%;background:var(--accent);margin-top:.35rem;flex-shrink:0;}
+.hd.p{background:var(--accent2);}
+.hd.g{background:var(--accent3);}
+.ht{font-size:.87rem;color:var(--tm);line-height:1.6;}
+.ht strong{color:var(--text);font-weight:500;}
+
+.el{display:flex;flex-direction:column;gap:1.25rem;}
+.ec{border:1px solid var(--border);border-radius:8px;background:var(--surface);overflow:hidden;transition:border-color .3s;}
+.ec:hover{border-color:var(--bh);}
+.eh{padding:1.5rem 2rem;display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:start;}
+.er{font-family:"Outfit",sans-serif;font-size:1.05rem;font-weight:600;color:var(--text);margin-bottom:.25rem;}
+.eo{font-size:.8rem;color:var(--td);}
+.em2{text-align:right;flex-shrink:0;}
+.eb2{display:inline-block;padding:.22rem .7rem;background:rgba(99,179,237,.08);border:1px solid rgba(99,179,237,.2);border-radius:100px;font-size:.7rem;color:var(--accent);margin-bottom:.4rem;}
+.et2{display:block;font-size:.68rem;color:var(--td);text-transform:uppercase;letter-spacing:.1em;}
+.ebody{padding:0 2rem 1.5rem;border-top:1px solid var(--border);}
+.esum{font-size:.88rem;color:var(--tm);margin:1.1rem 0;line-height:1.75;padding-bottom:1.1rem;border-bottom:1px solid var(--border);}
+.eul{list-style:none;display:flex;flex-direction:column;gap:.55rem;}
+.eul li{font-size:.858rem;color:var(--tm);display:flex;gap:.75rem;align-items:flex-start;line-height:1.65;}
+.eul li::before{content:"›";color:var(--accent);font-size:1rem;line-height:1.5;flex-shrink:0;}
+
+.bag{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;}
+.bac{padding:2rem;border-radius:8px;}
+.bef{border:1px solid var(--red-b);background:var(--red-bg);}
+.aft{border:1px solid rgba(99,179,237,.2);background:rgba(99,179,237,.03);}
+.bah{display:flex;align-items:center;gap:.75rem;margin-bottom:1.75rem;}
+.bai{width:34px;height:34px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;}
+.bai.b{border:1px solid var(--red-b);background:rgba(239,68,68,.06);}
+.bai.a{border:1px solid rgba(99,179,237,.2);background:rgba(99,179,237,.06);}
+.bal{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.15rem;}
+.bal.b{color:var(--red-c);}
+.bal.a{color:var(--accent);}
+.bat{font-family:"Outfit",sans-serif;font-size:.9rem;font-weight:600;color:var(--text);}
+.bai2{display:flex;flex-direction:column;gap:.85rem;}
+.bi{display:flex;gap:.75rem;align-items:flex-start;}
+.bx{color:var(--red-c);font-size:.75rem;margin-top:.2rem;flex-shrink:0;}
+.bck{color:var(--accent3);font-size:.75rem;margin-top:.2rem;flex-shrink:0;}
+.bi span{font-size:.858rem;color:var(--tm);line-height:1.65;}
+
+.apg{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.apc{padding:1.75rem;border:1px solid var(--border);border-radius:8px;background:var(--bg);transition:all .25s;position:relative;overflow:hidden;}
+.apc::after{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.apc:hover{border-color:var(--bh);transform:translateY(-2px);}
+.apc:hover::after{transform:scaleX(1);}
+.api{font-size:1.4rem;margin-bottom:1rem;}
+.apt{font-family:"Outfit",sans-serif;font-size:.92rem;font-weight:600;color:var(--text);margin-bottom:.65rem;}
+.apd{font-size:.838rem;color:var(--tm);line-height:1.75;}
+
+.tlw{display:flex;flex-direction:column;max-width:820px;}
+.tli{display:grid;grid-template-columns:110px 48px 1fr;gap:0 1.5rem;align-items:stretch;}
+.tli.last{align-items:start;}
+.tleft{display:flex;align-items:flex-start;padding-top:1.1rem;justify-content:flex-end;}
+.tper{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:500;text-align:right;white-space:nowrap;}
+.tcen{display:flex;flex-direction:column;align-items:center;}
+.tdot{width:44px;height:44px;border-radius:50%;border:1px solid var(--border);background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;transition:border-color .2s;}
+.tli:hover .tdot{border-color:var(--accent);}
+.tlin{flex:1;width:1px;background:var(--border);margin:4px 0;}
+.tcard{padding:1rem 0 2.5rem 0;}
+.ttit{font-family:"Outfit",sans-serif;font-size:1rem;font-weight:600;color:var(--text);margin-bottom:.75rem;}
+.tul{list-style:none;display:flex;flex-direction:column;gap:.55rem;}
+.tul li{font-size:.855rem;color:var(--tm);line-height:1.7;display:flex;gap:.65rem;align-items:flex-start;}
+.tul li::before{content:"›";color:var(--accent);font-size:1rem;line-height:1.5;flex-shrink:0;}
+
+.skg{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.skc{padding:1.6rem;border:1px solid var(--border);border-radius:8px;background:var(--bg);transition:all .25s;position:relative;overflow:hidden;}
+.skc::after{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.skc:hover{border-color:var(--bh);transform:translateY(-2px);}
+.skc:hover::after{transform:scaleX(1);}
+.ski{width:34px;height:34px;border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.95rem;margin-bottom:1rem;background:var(--surface);}
+.skt{font-family:"Outfit",sans-serif;font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.65rem;}
+.sktg{display:flex;flex-wrap:wrap;gap:.35rem;}
+.tag{padding:.18rem .55rem;background:rgba(99,179,237,.06);border:1px solid rgba(99,179,237,.12);border-radius:3px;font-size:.68rem;color:var(--tm);}
+
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+.ct p{font-size:.93rem;color:var(--tm);line-height:1.85;margin-bottom:1.1rem;}
+.cl{display:flex;flex-direction:column;gap:.65rem;}
+.ci{display:flex;align-items:center;gap:1rem;padding:1rem 1.1rem;border:1px solid var(--border);border-radius:6px;background:var(--surface);text-decoration:none;transition:all .2s;color:var(--text);}
+.ci:hover{border-color:var(--bh);background:var(--surface2);}
+.cic{width:32px;height:32px;border:1px solid var(--border);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:.85rem;background:var(--bg);color:var(--accent);flex-shrink:0;}
+.clb{font-size:.68rem;color:var(--td);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.12rem;}
+.cv{font-size:.86rem;color:var(--tm);outline:none;display:block;}
+.cv:empty::before{content:attr(data-p);color:var(--td);font-style:italic;}
+
+footer{padding:1.5rem 5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:.73rem;color:var(--td);position:relative;z-index:1;flex-wrap:wrap;gap:.5rem;}
+
+.rv{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease;}
+.rv.vis{opacity:1;transform:translateY(0);}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--surface2);}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem;}
+  nav ul{display:none;}
+  .sec{padding:4rem 1.5rem;}
+  .hero{grid-template-columns:1fr;padding:6rem 1.5rem 3rem;gap:2.5rem;}
+  .pf{aspect-ratio:4/3;}
+  .sr{margin:0 1.5rem;grid-template-columns:repeat(2,1fr);}
+  .ag,.cg{grid-template-columns:1fr;gap:2.5rem;}
+  .skg,.apg{grid-template-columns:repeat(2,1fr);}
+  .bag{grid-template-columns:1fr;}
+  .eh{grid-template-columns:1fr;}
+  .em2{text-align:left;}
+  .tli{grid-template-columns:70px 40px 1fr;gap:0 1rem;}
+  .tper{font-size:.62rem;}
+  .tdot{width:36px;height:36px;font-size:.9rem;}
+  footer{padding:1.5rem;}
+  #et{bottom:1.5rem;right:1.5rem;}
+}
+@media(max-width:480px){
+  .skg,.apg{grid-template-columns:1fr;}
+  .ha{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div id="eb">Edit mode ON — click any text to edit &nbsp;·&nbsp; click ✓ to exit</div>
+<button id="et">✏</button>
+
+<nav>
+  <div class="nl" data-e contenteditable="false" data-p="Your Name" spellcheck="false">Your Name</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact" class="nc">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="home">
+  <div>
+    <div class="hb">Open to opportunities</div>
+    <h1>Operations &<br><span class="gr">Project Lead</span><br>by nature.</h1>
+    <p class="hs" data-e contenteditable="false" data-p="Your tagline..." spellcheck="false">Industrial Engineering & Information Systems student with proven experience driving organizational change, designing systems, and delivering results under pressure.</p>
+    <div class="ha">
+      <a href="#experience" class="bp">View Experience &rarr;</a>
+      <a href="#contact" class="bg">Get in Touch</a>
+    </div>
+  </div>
+  <div>
+    <div class="pf" id="pbox">
+      <div class="pc tl"></div><div class="pc tr"></div><div class="pc bl"></div><div class="pc br"></div>
+      <div class="pp" id="pph">
+        <div class="pi">&#128247;</div>
+        <p>Click to upload<br>your photo</p>
+      </div>
+      <img id="pimg" alt="Profile">
+      <input type="file" accept="image/*" onchange="doPhoto(event)">
+    </div>
+  </div>
+</section>
+
+<div class="sr rv">
+  <div class="si"><div class="sn">1.5<span style="font-size:1rem">yr</span></div><div class="sl">Org. Redesign Lead</div></div>
+  <div class="si"><div class="sn">20+</div><div class="sl">People Managed</div></div>
+  <div class="si"><div class="sn">3</div><div class="sl">Leadership Roles</div></div>
+  <div class="si"><div class="sn">IE</div><div class="sl">Ind. Eng. &amp; Info Sys.</div></div>
+</div>
+
+<s2 class="sec alt" id="about">
+  <div class="ey">About</div>
+  <div class="ag">
+    <div>
+      <h2 class="st rv">Built on systems.<br><span class="d">Driven by outcomes.</span></h2>
+      <div class="at rv">
+        <p>I am an Industrial Engineering &amp; Information Systems student whose foundation was built in the field. My background spans <strong>full organizational redesign, process engineering, and multi-stakeholder operations</strong> across complex, high-stakes environments.</p>
+        <p>I approach problems the way an engineer does: map the system, locate the friction, design a solution. Whether that is a workflow, a team structure, or an infrastructure spec &mdash; I work best when the problem is messy and the path forward is not obvious yet.</p>
+        <p>Currently looking for roles in <strong>Project Management</strong> or <strong>Operations</strong> where systems thinking and execution ability matter.</p>
+      </div>
+    </div>
+    <div class="hs2 rv">
+      <div class="hi"><div class="hd"></div><div class="ht"><strong>Systems-first thinker</strong> &mdash; from IT infrastructure specs to org-level process design</div></div>
+      <div class="hi"><div class="hd p"></div><div class="ht"><strong>Operator under pressure</strong> &mdash; managed emergency transitions, real-time escalations, and ad-hoc crises</div></div>
+      <div class="hi"><div class="hd g"></div><div class="ht"><strong>Builder by default</strong> &mdash; authored SOPs, defined workstation profiles, led UAT drills from scratch</div></div>
+      <div class="hi"><div class="hd"></div><div class="ht"><strong>Cross-functional collaborator</strong> &mdash; worked with dev teams, senior command, and external partners simultaneously</div></div>
+    </div>
+  </div>
+</s2>
+
+<s2 class="sec" id="experience">
+  <div class="ey">Experience</div>
+  <h2 class="st rv">What I have <span class="d">delivered</span></h2>
+  <div class="el">
+    <div class="ec rv">
+      <div class="eh">
+        <div><div class="er">Research Cell Commander</div><div class="eo">Analysis Unit &middot; Brigade Level</div></div>
+        <div class="em2"><div class="eb2">2021 &ndash; 2023</div><span class="et2">Strategy &amp; Systems</span></div>
+      </div>
+      <div class="ebody">
+        <p class="esum">Led the organizational build-up of an analysis unit from the ground up &mdash; designing processes, defining roles, recruiting personnel, and establishing the operational framework in a complex military environment.</p>
+        <ul class="eul">
+          <li>Commanded a team of analysts; delivered biweekly situation assessments to senior command officials</li>
+          <li>Defined staffing standards, recruited personnel, and aligned resources with mission requirements</li>
+          <li>Mapped IT infrastructure needs and defined workstation profiles for all roles based on operational requirements</li>
+          <li>Participated in initial system requirements definition, contributing to translation of operational needs into technical direction</li>
+          <li>Authored an integrative Procedures &amp; Mission Book synchronizing schedules, SOPs, and role-specific tasks unit-wide</li>
+          <li>Embedded all processes through comprehensive operational drills ensuring readiness for routine-to-emergency transitions</li>
+          <li>Coordinated with multi-branch agencies and external stakeholders throughout the build-up process</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ec rv">
+      <div class="eh">
+        <div><div class="er">Deputy Officer</div><div class="eo">Brigade Division &middot; 4&ndash;6 Direct Reports</div></div>
+        <div class="em2"><div class="eb2">2023 &ndash; 2024</div><span class="et2">Operations &amp; Leadership</span></div>
+      </div>
+      <div class="ebody">
+        <p class="esum">Served as the operational backbone of a brigade-level division &mdash; the go-to person for keeping things running, resolving issues before they escalate, and filling gaps before they become problems.</p>
+        <ul class="eul">
+          <li>Directed battle preparation procedures and intelligence analysis projects for brigade battalions and training units</li>
+          <li>Orchestrated full transition from routine to emergency operations, including control center setup and logistical management</li>
+          <li>Resolved operational and technical issues end-to-end &mdash; from personal troubleshooting to vendor escalation &mdash; maintaining continuous unit functionality</li>
+          <li>Managed personnel gaps proactively: identifying shortfalls, sourcing solutions through formal and informal channels</li>
+          <li>Handled equipment and resource procurement ensuring operational continuity under time pressure</li>
+          <li>Conducted periodic reviews and implemented lessons learned to continuously improve departmental processes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</s2>
+
+<s2 class="sec alt" id="impact">
+  <div class="ey">Operational Impact</div>
+  <h2 class="st rv">From <span class="d">ambiguity</span> to structure</h2>
+  <div class="bag rv">
+    <div class="bac bef">
+      <div class="bah"><div class="bai b">&#9888;</div><div><div class="bal b">Starting Point</div><div class="bat">The Inherited State</div></div></div>
+      <div class="bai2">
+        <div class="bi"><span class="bx">&#10005;</span><span>Legacy systems failing to support the operational mission</span></div>
+        <div class="bi"><span class="bx">&#10005;</span><span>Zero documentation &mdash; analyst roles undefined and unstructured</span></div>
+        <div class="bi"><span class="bx">&#10005;</span><span>Unpredictable shift structures causing constant operational friction</span></div>
+      </div>
+    </div>
+    <div class="bac aft">
+      <div class="bah"><div class="bai a">&#10003;</div><div><div class="bal a">End State</div><div class="bat">The Designed Framework</div></div></div>
+      <div class="bai2">
+        <div class="bi"><span class="bck">&#10003;</span><span>Authored the unit's comprehensive Standard Operating Procedure (SOP) from scratch</span></div>
+        <div class="bi"><span class="bck">&#10003;</span><span>Defined physical workstations per role and enforced a structured, predictable shift cycle</span></div>
+        <div class="bi"><span class="bck">&#10003;</span><span>Managed full logistical envelope &mdash; meals, equipment, infrastructure &mdash; ensuring 24/7 operational continuity</span></div>
+      </div>
+    </div>
+  </div>
+</s2>
+
+<s2 class="sec" id="timeline">
+  <div class="ey">Project Lifecycle</div>
+  <h2 class="st rv">The 6-Month <span class="d">Re-Engineering Roadmap</span></h2>
+  <div class="tlw rv">
+    <div class="tli">
+      <div class="tleft"><div class="tper">Months 1&ndash;2</div></div>
+      <div class="tcen"><div class="tdot">&#128269;</div><div class="tlin"></div></div>
+      <div class="tcard"><div class="ttit">Discovery &amp; Gap Analysis</div>
+        <ul class="tul">
+          <li>Conducted deep-dive sessions with reserve command to map expected operational outputs and cross-functional interfaces</li>
+          <li>Executed an initial live drill which exposed critical systemic failures &mdash; shift structures were unsustainable and legacy processes were non-functional under load</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tli">
+      <div class="tleft"><div class="tper">Months 3&ndash;4</div></div>
+      <div class="tcen"><div class="tdot">&#128256;</div><div class="tlin"></div></div>
+      <div class="tcard"><div class="ttit">Process Architecture &amp; Roster Design</div>
+        <ul class="tul">
+          <li>Redefined the unit's core mission and mapped the As-Is vs To-Be operational states</li>
+          <li>Designed a rigid shift roster, defining exact hierarchies and aligning the schedule to match realistic operational capacity</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tli">
+      <div class="tleft"><div class="tper">Month 5</div></div>
+      <div class="tcen"><div class="tdot">&#128737;</div><div class="tlin"></div></div>
+      <div class="tcard"><div class="ttit">Infrastructure Scoping &amp; Risk Mitigation</div>
+        <ul class="tul">
+          <li>Characterized physical workstation specs per role &mdash; Command nodes requiring 4 cross-network PCs vs. standard 2-PC analyst nodes</li>
+          <li>Designed manual failover processes: allocated a dedicated operational role to bridge system connectivity failures and ensure continuous data flow</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tli last">
+      <div class="tleft"><div class="tper">Month 6</div></div>
+      <div class="tcen"><div class="tdot">&#128216;</div></div>
+      <div class="tcard"><div class="ttit">SOP Documentation &amp; Onboarding</div>
+        <ul class="tul">
+          <li>Authored role-specific training decks and operational playbooks for every position on the roster</li>
+          <li>Established the foundational knowledge base, laying the blueprint for future integration into digital Learning Management Systems (LMS)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</s2>
+
+<s2 class="sec alt" id="approach">
+  <div class="ey">Mindset</div>
+  <h2 class="st rv">How I <span class="d">work</span></h2>
+  <div class="apg">
+    <div class="apc rv"><div class="api">&#128506;</div><div class="apt">Map before you move</div><div class="apd">I do not start solving until I understand the full system. Most problems look like execution failures but are actually design failures upstream.</div></div>
+    <div class="apc rv"><div class="api">&#9889;</div><div class="apt">A working solution beats a perfect plan</div><div class="apd">I will take an imperfect solution that ships today over a flawless one that arrives too late. Iteration beats paralysis every time.</div></div>
+    <div class="apc rv"><div class="api">&#128279;</div><div class="apt">Own the gap</div><div class="apd">If something is not covered, I cover it. I do not wait for someone to assign ownership &mdash; if I see a gap affecting the mission, I move on it.</div></div>
+  </div>
+</s2>
+
+<s2 class="sec" id="skills">
+  <div class="ey">Capabilities</div>
+  <h2 class="st rv">What I bring <span class="d">to the table</span></h2>
+  <div class="skg">
+    <div class="skc rv"><div class="ski">&#9881;&#65039;</div><div class="skt">Process Design</div><div class="sktg"><span class="tag">Process Mapping</span><span class="tag">SOP Authoring</span><span class="tag">Role Definition</span><span class="tag">Gap Analysis</span><span class="tag">UAT</span></div></div>
+    <div class="skc rv"><div class="ski">&#128203;</div><div class="skt">Project Management</div><div class="sktg"><span class="tag">Stakeholder Mgmt</span><span class="tag">Resource Planning</span><span class="tag">Risk Mitigation</span><span class="tag">Change Management</span></div></div>
+    <div class="skc rv"><div class="ski">&#128269;</div><div class="skt">Systems Thinking</div><div class="sktg"><span class="tag">Requirements Analysis</span><span class="tag">Workstation Profiling</span><span class="tag">Workflow Design</span><span class="tag">Org. Design</span></div></div>
+    <div class="skc rv"><div class="ski">&#129309;</div><div class="skt">Stakeholder Management</div><div class="sktg"><span class="tag">Cross-functional</span><span class="tag">Executive Comms</span><span class="tag">Alignment</span></div></div>
+    <div class="skc rv"><div class="ski">&#9889;</div><div class="skt">Operations</div><div class="sktg"><span class="tag">Emergency Mgmt</span><span class="tag">Real-time Problem Solving</span><span class="tag">Incident Mgmt</span><span class="tag">Force Build-up</span></div></div>
+    <div class="skc rv"><div class="ski">&#128202;</div><div class="skt">Technical Foundation</div><div class="sktg"><span class="tag">Industrial Engineering</span><span class="tag">Information Systems</span><span class="tag">Excel &amp; Dashboards</span></div></div>
+  </div>
+</s2>
+
+<s2 class="sec alt" id="contact">
+  <div class="ey">Contact</div>
+  <div class="cg">
+    <div>
+      <h2 class="st rv">Let's <span class="d">connect</span></h2>
+      <div class="ct rv">
+        <p>I am currently exploring full-time opportunities in Project Management and Operations &mdash; roles where I can apply systems thinking, drive process improvement, and work across complex stakeholder environments.</p>
+        <p>If you think there is a fit, reach out directly.</p>
+      </div>
+    </div>
+    <div class="cl rv">
+      <a href="mailto:" class="ci" id="eml"><div class="cic">&#9993;</div><div><div class="clb">Email</div><div class="cv" data-e contenteditable="false" data-p="your@email.com" id="ev" spellcheck="false"></div></div></a>
+      <a href="https://linkedin.com" class="ci" id="lnk" target="_blank"><div class="cic" style="font-weight:600;font-size:.75rem;font-family:Outfit,sans-serif;">in</div><div><div class="clb">LinkedIn</div><div class="cv" data-e contenteditable="false" data-p="linkedin.com/in/yourprofile" id="lv" spellcheck="false"></div></div></a>
+      <a href="tel:" class="ci" id="phl"><div class="cic">&#9742;</div><div><div class="clb">Phone</div><div class="cv" data-e contenteditable="false" data-p="+972 50 000 0000" id="pv" spellcheck="false"></div></div></a>
+    </div>
+  </div>
+</s2>
+
+<footer>
+  <span>&copy; 2025 <span data-e contenteditable="false" data-p="Your Name" spellcheck="false"></span></span>
+  <span>Industrial Engineering &amp; Information Systems</span>
+</footer>
+
+<script>
+function doPhoto(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(x){var i=document.getElementById("pimg");i.src=x.target.result;i.style.display="block";document.getElementById("pph").style.display="none";};r.readAsDataURL(f);}
+var obs=new IntersectionObserver(function(en){en.forEach(function(e,i){if(e.isIntersecting){setTimeout(function(){e.target.classList.add("vis");},i*70);obs.unobserve(e.target);}});},{threshold:.08});
+document.querySelectorAll(".rv").forEach(function(el){obs.observe(el);});
+document.getElementById("ev").addEventListener("input",function(){document.getElementById("eml").href="mailto:"+this.textContent.trim();});
+document.getElementById("lv").addEventListener("input",function(){var v=this.textContent.trim();document.getElementById("lnk").href=v.startsWith("http")?v:"https://"+v;});
+document.getElementById("pv").addEventListener("input",function(){document.getElementById("phl").href="tel:"+this.textContent.replace(/\s|-/g,"");});
+var btn=document.getElementById("et"),ban=document.getElementById("eb"),eds=document.querySelectorAll("[data-e]");
+btn.addEventListener("click",function(){var on=document.body.classList.toggle("em");btn.classList.toggle("on",on);ban.classList.toggle("on",on);eds.forEach(function(el){el.contentEditable=on?"true":"false";});btn.textContent=on?"✓":"✏";});
+</script>
+</body>
+</html>
