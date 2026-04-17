@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work Portfolio — Elad Shiron</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050810;--sur:#0c1020;--sur2:#111827;
+  --bo:rgba(99,179,237,0.12);--boh:rgba(99,179,237,0.35);
+  --ac:#63b3ed;--ac2:#9f7aea;--ac3:#68d391;
+  --redbg:rgba(239,68,68,0.04);--redborder:rgba(239,68,68,0.2);
+  --tx:#e2e8f0;--tm:#829ab1;--td:#4a5568;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--tx);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;line-height:1.75;font-size:16px;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(99,179,237,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(99,179,237,0.02) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
+.orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0;}
+.o1{width:500px;height:500px;background:rgba(99,179,237,0.05);top:-100px;right:-100px;}
+.o2{width:400px;height:400px;background:rgba(159,122,234,0.04);bottom:20%;left:-100px;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 4rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--bo);background:rgba(5,8,16,.92);backdrop-filter:blur(20px);}
+.nlogo{font-family:'Outfit',sans-serif;font-size:1rem;font-weight:700;color:var(--tx);}
+.nlinks{display:flex;gap:2rem;list-style:none;}
+.nlinks a{color:var(--tm);text-decoration:none;font-size:.82rem;transition:color .2s;}
+.nlinks a:hover{color:var(--ac);}
+.nback{color:var(--ac);text-decoration:none;font-size:.82rem;border:1px solid var(--bo);padding:.35rem .9rem;border-radius:4px;transition:all .2s;}
+.nback:hover{border-color:var(--boh);background:rgba(99,179,237,.06);}
+
+.hero{padding:9rem 5rem 5rem;position:relative;z-index:1;border-bottom:1px solid var(--bo);max-width:1100px;margin:0 auto;}
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;padding:.3rem .85rem;border:1px solid var(--bo);border-radius:100px;font-size:.72rem;color:var(--ac);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem;background:rgba(99,179,237,.05);}
+.hero h1{font-family:'Outfit',sans-serif;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-bottom:.75rem;}
+.hero h1 span{background:linear-gradient(135deg,var(--ac),var(--ac2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-size:.98rem;color:var(--tm);max-width:600px;line-height:1.85;margin-bottom:2.5rem;}
+.hero-meta{display:flex;flex-wrap:wrap;gap:2.5rem;}
+.meta-item{display:flex;flex-direction:column;gap:.2rem;}
+.meta-label{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--td);}
+.meta-value{font-size:.88rem;color:var(--tm);font-weight:500;}
+
+.toc{max-width:1100px;margin:0 auto;padding:3.5rem 5rem;border-bottom:1px solid var(--bo);position:relative;z-index:1;}
+.toc-label{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);margin-bottom:1.2rem;}
+.toc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;}
+.toc-item{display:flex;align-items:flex-start;gap:1rem;padding:1.1rem 1.3rem;border:1px solid var(--bo);border-radius:6px;background:var(--sur);text-decoration:none;transition:all .2s;color:var(--tx);}
+.toc-item:hover{border-color:var(--boh);background:var(--sur2);}
+.toc-num{font-family:'Outfit',sans-serif;font-size:1.6rem;font-weight:800;color:rgba(99,179,237,.15);line-height:1;flex-shrink:0;}
+.toc-sub{font-size:.7rem;color:var(--td);margin-bottom:.2rem;}
+.toc-name{font-size:.85rem;color:var(--tm);font-weight:500;line-height:1.4;}
+
+.main{max-width:1100px;margin:0 auto;padding:5rem;}
+
+.psec{margin-bottom:6.5rem;}
+.sec-hdr{display:flex;align-items:flex-start;gap:2rem;margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:1px solid var(--bo);}
+.sec-big{font-family:'Outfit',sans-serif;font-size:5.5rem;font-weight:800;color:rgba(99,179,237,.08);line-height:1;flex-shrink:0;}
+.sec-eyebrow{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);margin-bottom:.35rem;}
+.sec-title{font-family:'Outfit',sans-serif;font-size:1.9rem;font-weight:700;color:var(--tx);line-height:1.2;margin-bottom:.35rem;}
+.sec-role{font-size:.85rem;color:var(--td);}
+
+.blk{margin-bottom:2.5rem;}
+.blk-label{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ac);margin-bottom:.9rem;font-weight:500;}
+.blk-text{font-size:.92rem;color:var(--tm);line-height:1.85;}
+
+.findings{display:flex;flex-direction:column;gap:.5rem;}
+.fi{display:flex;gap:.85rem;align-items:flex-start;padding:.9rem 1.1rem;border-radius:5px;border:1px solid;}
+.fi-bad{border-color:var(--redborder);background:var(--redbg);}
+.fi-warn{border-color:rgba(234,179,8,.2);background:rgba(234,179,8,.03);}
+.fi-icon{flex-shrink:0;margin-top:.15rem;width:16px;text-align:center;font-size:.85rem;}
+.fi-text{font-size:.88rem;color:var(--tm);line-height:1.65;}
+
+.gt{width:100%;border-collapse:collapse;font-size:.84rem;}
+.gt th{padding:.7rem .95rem;text-align:left;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;border-bottom:1px solid var(--bo);background:var(--sur);}
+.gt td{padding:.9rem .95rem;vertical-align:top;border-bottom:1px solid var(--bo);line-height:1.6;}
+.gt tr:last-child td{border-bottom:none;}
+.gt tr:hover td{background:rgba(99,179,237,.015);}
+.cd{color:var(--tx);font-weight:600;font-family:'Outfit',sans-serif;}
+.ca{color:rgba(239,68,68,.72);}
+.cg{color:rgba(234,179,8,.72);}
+.ct{color:var(--ac3);}
+.tha{color:rgba(239,68,68,.65);}
+.thg{color:rgba(234,179,8,.65);}
+.tht{color:var(--ac3);}
+.thd{color:var(--tm);}
+
+.actions{display:flex;flex-direction:column;gap:.5rem;}
+.ac-item{display:flex;gap:.85rem;align-items:flex-start;padding:.9rem 1.1rem;border-radius:5px;border:1px solid rgba(104,211,145,.18);background:rgba(104,211,145,.025);}
+.ac-check{color:var(--ac3);flex-shrink:0;margin-top:.15rem;font-size:.95rem;}
+.ac-text{font-size:.88rem;color:var(--tm);line-height:1.65;}
+
+.outcome-box{padding:1.75rem 2rem;border:1px solid var(--bo);border-radius:7px;background:var(--sur);}
+.outcome-text{font-size:.92rem;color:var(--tm);line-height:1.85;margin-bottom:.9rem;}
+.outcome-note{font-size:.8rem;color:var(--td);line-height:1.65;padding:.75rem 1rem;border-left:2px solid var(--bo);font-style:italic;}
+
+.flow{display:flex;flex-direction:column;}
+.fstep{display:grid;grid-template-columns:80px 36px 1fr;gap:0 1rem;align-items:stretch;}
+.fstep.last{align-items:start;}
+.ftime{display:flex;align-items:flex-start;padding-top:.7rem;justify-content:flex-end;}
+.ftime-t{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ac);font-weight:500;white-space:nowrap;}
+.fcenter{display:flex;flex-direction:column;align-items:center;}
+.fdot{width:34px;height:34px;border-radius:50%;border:1px solid var(--bo);background:var(--sur2);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;}
+.fline{flex:1;width:1px;background:var(--bo);margin:3px 0;}
+.fcard{padding:.7rem 0 2.2rem;}
+.fcard-title{font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:600;color:var(--tx);margin-bottom:.4rem;}
+.fcard-list{list-style:none;display:flex;flex-direction:column;gap:.4rem;}
+.fcard-list li{font-size:.85rem;color:var(--tm);line-height:1.6;display:flex;gap:.45rem;align-items:flex-start;}
+.fcard-list li::before{content:'›';color:var(--ac);font-size:1rem;line-height:1.45;flex-shrink:0;}
+
+.pb-step{display:flex;gap:1rem;align-items:flex-start;padding:.95rem 1.2rem;border:1px solid var(--bo);border-radius:5px;background:var(--sur);margin-bottom:.5rem;transition:border-color .2s;}
+.pb-step:hover{border-color:var(--boh);}
+.pb-num{width:26px;height:26px;border-radius:50%;background:rgba(99,179,237,.08);border:1px solid var(--bo);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:var(--ac);flex-shrink:0;font-family:'Outfit',sans-serif;}
+.pb-title{font-size:.88rem;font-weight:600;color:var(--tx);margin-bottom:.25rem;font-family:'Outfit',sans-serif;}
+.pb-desc{font-size:.83rem;color:var(--tm);line-height:1.6;}
+.pb-note{font-size:.75rem;color:var(--td);margin-top:.35rem;font-style:italic;}
+
+.sdiv{height:1px;background:linear-gradient(90deg,var(--ac),var(--ac2),transparent);opacity:.18;margin:4rem 0;}
+
+.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.ba-col{padding:1.3rem 1.5rem;border-radius:7px;border:1px solid;}
+.ba-bad{border-color:var(--redborder);background:var(--redbg);}
+.ba-good{border-color:rgba(104,211,145,.18);background:rgba(104,211,145,.025);}
+.ba-label{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.85rem;font-weight:600;}
+.ba-label-red{color:rgba(239,68,68,.7);}
+.ba-label-green{color:var(--ac3);}
+
+.rv{opacity:0;transform:translateY(18px);transition:opacity .65s ease-out,transform .65s ease-out;}
+.rv.vis{opacity:1;transform:translateY(0);}
+
+footer{padding:1.75rem 5rem;border-top:1px solid var(--bo);display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--td);position:relative;z-index:1;}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem;}
+  .nlinks{display:none;}
+  .hero,.toc,.main{padding-right:1.5rem;padding-left:1.5rem;}
+  .hero{padding-top:6rem;}
+  .toc-grid{grid-template-columns:1fr;}
+  .sec-big{font-size:3rem;}
+  .sec-title{font-size:1.4rem;}
+  .gt{font-size:.77rem;}
+  .gt th,.gt td{padding:.6rem .65rem;}
+  .ba-grid{grid-template-columns:1fr;}
+  .fstep{grid-template-columns:65px 32px 1fr;}
+  footer{padding:1.5rem;flex-direction:column;gap:.4rem;text-align:center;}
+}
+</style>
+</head>
+<body>
+<div class="orb o1"></div>
+<div class="orb o2"></div>
+
+<nav>
+  <div class="nlogo">Elad Shiron</div>
+  <ul class="nlinks">
+    <li><a href="#s1">Emergency Unit</a></li>
+    <li><a href="#s2">Command Center</a></li>
+    <li><a href="#s3">Deputy CO</a></li>
+  </ul>
+  <a href="index.html" class="nback">← Back to Portfolio</a>
+</nav>
+
+<div class="hero rv">
+  <div class="hero-tag">Work Portfolio · Operations Management</div>
+  <h1>Work<br><span>Portfolio</span></h1>
+  <p class="hero-sub">An in-depth documentation of three key roles — the thinking process, decisions made, and systems built. Designed to provide depth beyond a resume.</p>
+  <p style="font-size:.92rem;color:var(--tm);max-width:660px;line-height:1.9;margin-top:1.2rem;padding:1.2rem 1.5rem;border:1px solid var(--bo);border-radius:6px;background:var(--sur);border-right:3px solid var(--ac);">The systems I built in these roles — process documentation, cross-functional interfaces, incident response — translate directly to how I think about project delivery and operations management. I'm now building the technical vocabulary to go with it: currently completing Scrum and Jira certifications alongside a PM program.</p>
+<div class="hero-meta" style="margin-top:2rem;">
+    <div class="meta-item"><div class="meta-label">Period</div><div class="meta-value">2021 – 2024</div></div>
+    <div class="meta-item"><div class="meta-label">Roles</div><div class="meta-value">3 Key Positions</div></div>
+    <div class="meta-item"><div class="meta-label">Education</div><div class="meta-value">IE & Info Systems · Bar-Ilan</div></div>
+  </div>
+</div>
+
+<div class="toc rv">
+  <div class="toc-label">Table of Contents</div>
+  <div class="toc-grid">
+    <a href="#s1" class="toc-item">
+      <div class="toc-num">01</div>
+      <div><div class="toc-sub">Role A · 2021–2023</div><div class="toc-name">Emergency Unit Commander — Building Organizational Infrastructure</div></div>
+    </a>
+    <a href="#s2" class="toc-item">
+      <div class="toc-num">02</div>
+      <div><div class="toc-sub">Role B · 2021–2023</div><div class="toc-name">Command Center Commander — Process Institutionalization</div></div>
+    </a>
+    <a href="#s3" class="toc-item">
+      <div class="toc-num">03</div>
+      <div><div class="toc-sub">2023–2024</div><div class="toc-name">Deputy Commander — Real-Time Execution & Crisis Management</div></div>
+    </a>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════ S1 ══════════════ -->
+<div class="psec" id="s1">
+  <div class="sec-hdr rv">
+    <div class="sec-big">01</div>
+    <div>
+      <div class="sec-eyebrow">Role A · 2021–2023</div>
+      <div class="sec-title">Operations & Project Lead</div>
+      <div class="sec-role">Building Organizational Infrastructure from Scratch</div>
+    </div>
+  </div>
+
+  <div class="blk rv">
+    <div class="blk-label">Background & Mandate</div>
+    <p class="blk-text">Upon entering the role, the unit existed on paper but was not functional. An initial drill conducted shortly after my arrival exposed structural failures: no defined workflows, personnel who didn't know their exact responsibilities, external interfaces that had broken down due to either a lack of suitable personnel or a failure to recognize the unit's value, and infrastructure that didn't match operational requirements. The mandate: build — people, processes, interfaces, infrastructure.</p>
+  </div>
+
+  <div class="blk rv">
+    <div class="blk-label">Entry State — What I Found</div>
+    <div class="findings">
+      <div class="fi fi-bad"><div class="fi-icon" style="color:rgba(239,68,68,.8);">✗</div><div class="fi-text">Partial, unclear documentation — roles defined in name only, with no task breakdown or clear accountability</div></div>
+      <div class="fi fi-bad"><div class="fi-icon" style="color:rgba(239,68,68,.8);">✗</div><div class="fi-text">Infrastructure mismatch — equipment and systems that didn't meet the requirements of different roles</div></div>
+      <div class="fi fi-bad"><div class="fi-icon" style="color:rgba(239,68,68,.8);">✗</div><div class="fi-text">Broken external interfaces — some partners lacked capacity to coordinate; others didn't see the need</div></div>
+      <div class="fi fi-bad"><div class="fi-icon" style="color:rgba(239,68,68,.8);">✗</div><div class="fi-text">No standardized workflows — every person operated on their own judgment with no defined process</div></div>
+      <div class="fi fi-warn"><div class="fi-icon" style="color:rgba(234,179,8,.8);">⚠</div><div class="fi-text">Initial drill exposed all failures simultaneously — served as the trigger for a full redesign</div></div>
+    </div>
+  </div>
+
+  <div class="blk rv">
+    <div class="blk-label">Gap Matrix</div>
+    <table class="gt">
+      <thead>
+        <tr>
+          <th class="thd">Domain</th>
+          <th class="tha">As-Is</th>
+          <th class="thg">Gap</th>
+          <th class="tht">To-Be</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="cd">Documentation</td>
+          <td class="ca">Partial and unclear. Roles defined by title only.</td>
+          <td class="cg">No reliable knowledge source. Unit operates on tribal knowledge.</td>
+          <td class="ct">Comprehensive Mission Book for every role — tasks, responsibilities, interfaces.</td>
+        </tr>
+        <tr>
+          <td class="cd">Role Clarity</td>
+          <td class="ca">Personnel didn't know their exact tasks or accountability boundaries.</td>
+          <td class="cg">Overlaps and blind spots in task ownership. Ambiguous accountability under pressure.</td>
+          <td class="ct">Each role has a defined task list, clear scope, and a backup protocol for system failures.</td>
+        </tr>
+        <tr>
+          <td class="cd">Infrastructure</td>
+          <td class="ca">Equipment didn't match role requirements. System failures halted all operations.</td>
+          <td class="cg">Single point of failure with no fallback.</td>
+          <td class="ct">Workstation specs characterized per role + defined manual failover procedure.</td>
+        </tr>
+        <tr>
+          <td class="cd">External Interfaces</td>
+          <td class="ca">Interfaces existed on paper. In practice — inconsistently observed.</td>
+          <td class="cg">External partners didn't understand the unit's role or value.</td>
+          <td class="ct">Structured coordination protocols + standing working forum with each partner.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="blk rv">
+    <div class="blk-label">Timeline — What I Did</div>
+    <div class="flow">
+      <div class="fstep">
+        <div class="ftime"><div class="ftime-t">Mo. 1–2</div></div>
+        <div class="fcenter"><div class="fdot">🔍</div><div class="fline"></div></div>
+        <div class="fcard">
+          <div class="fcard-title">Discovery & Gap Analysis</div>
+          <ul class="fcard-list">
+            <li>Initial drill that exposed structural failures</li>
+            <li>Mapping of existing and expected working interfaces</li>
+            <li>Gap analysis between requirements and existing infrastructure</li>
+          </ul>
+        </div>
+      </div>
+      <div class="fstep">
+        <div class="ftime"><div class="ftime-t">Mo. 3–4</div></div>
+        <div class="fcenter"><div class="fdot">🔄</div><div class="fline"></div></div>
+        <div class="fcard">
+          <div class="fcard-title">Process & Schedule Design</div>
+          <ul class="fcard-list">
+            <li>Redefined the unit's core mission</li>
+            <li>Designed shift roster with clear hierarchy and escalation path</li>
+            <li>Aligned schedule to realistic personnel capacity</li>
+          </ul>
+        </div>
+      </div>
+      <div class="fstep">
+        <div class="ftime"><div class="ftime-t">Mo. 5</div></div>
+        <div class="fcenter"><div class="fdot">🛡</div><div class="fline"></div></div>
+        <div class="fcard">
+          <div class="fcard-title">Infrastructure Specification & Risk Design</div>
+          <ul class="fcard-list">
+            <li>Characterized physical workstation specs per role</li>
+            <li>Designed manual failover procedure for system outages</li>
+            <li>Assigned a dedicated role to bridge connectivity failures</li>
+          </ul>
+        </div>
+      </div>
+      <div class="fstep last">
+        <div class="ftime"><div class="ftime-t">Mo. 6</div></div>
+        <div class="fcenter"><div class="fdot">📖</div></div>
+        <div class="fcard">
+          <div class="fcard-title">Documentation & Go-Live</div>
+          <ul class="fcard-list">
+            <li>Authored Mission Book covering all role positions</li>
+            <li>Built role-specific training materials for each station</li>
+            <li>Laid groundwork for future integration with the tech department</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="blk rv">
+    <div class="blk-label">Outcome</div>
+    <div class="outcome-box">
+      <p class="outcome-text">By end of tenure, the unit had a defined organizational structure, documented processes, and formalized external interfaces — moving from an environment dependent on individual knowledge to one built on institutional process.</p>
+      <p class="outcome-note">Note: Core systems remained in development and dependent on the tech department. The deliverable was the organizational and process foundation — not the technology layer.</p>
+    </div>
+  </div>
+</div>
+
+<div class="sdiv"></div>
+
+<!-- ══════════════ S2 ══════════════ -->
+<div class="psec" id="s2">
+  <div class="sec-hdr rv">
+    <div class="sec-big">02</div>
+    <div>
+      <div class="sec-eyebrow">Role B · 2021–2023</div>
+      <div class="sec-title">Command Center Commander</div>
+<span style="background:rgba(99,179,237,0.1); color:#63b3ed; border:1px solid rgba(99,179,237,0.3); border-radius:4px; font-size:0.7rem; padding:0.15rem 0.5rem; margin-left:0.5rem;">Concurrent with Role A</span>
+      <div class="sec-role">Process Institutionalization & Working Routine</div>
+    </div>
+  </div>
+
+  <div class="blk rv">
+    <div class="blk-label">Background</div>
+    <p class="blk-text">I initially served as an officer in the command center. Following a unit-level reorganization (at the parent unit level), the command center came under my direct authority. From the moment it reported to me, we overhauled how it operated — from a center that reported "when something interesting happens" to one with defined workflows, a systematic debrief culture, and regular drills.</p>
+  </div>
+
+  <div class="blk rv">
+    <div class="blk-label">Before & After</div>
+    <div class="ba-grid">
+      <div class="ba-col ba-bad">
+        <div class="ba-label ba-label-red">Before</div>
+        <div class="findings" style="gap:.45rem;">
+          <div class="fi fi-bad" style="padding:.7rem .9rem;"><div class="fi-icon" style="color:rgba(239,68,68,.8);">✗</div><div class="fi-text">Vague mandate: "update when something interesting happens" — no criteria</div></div>
+          <div class="fi fi-bad" style="padding:.7rem .9rem;"><div class="fi-icon" style="color:rgba(239,68,68,.8);">✗</div><div class="fi-text">No response protocols — every officer operated on personal judgment</div></div>
+          <div class="fi fi-bad" style="padding:.7rem .9rem;"><div class="fi-icon" style="color:rgba(239,68,68,.8);">✗</div><div class="fi-text">No systematic debrief — no learning from past incidents</div></div>
+          <div class="fi fi-bad" style="padding:.7rem .9rem;"><div class="fi-icon" style="color:rgba(239,68,68,.8);">✗</div><div class="fi-text">No drills — personnel not prepared for high-pressure scenarios</div></div>
+        </div>
+      </div>
+      <div class="ba-col ba-good">
+        <div class="ba-label ba-label-green">After</div>
+        <div class="actions" style="gap:.45rem;">
+          <div class="ac-item" style="padding:.7rem .9rem;"><div class="ac-check">✓</div><div class="ac-text">Defined which events to track and how — clear, documented criteria</div></div>
+          <div class="ac-item" style="padding:.7rem .9rem;"><div class="ac-check">✓</div><div class="ac-text">SOP for each incident type — uniform, fast response regardless of who's on shift</div></div>
+          <div class="ac-item" style="padding:.7rem .9rem;"><div class="ac-check">✓</div><div class="ac-text">After-action review after every incident — including successful ones</div></div>
+          <div class="ac-item" style="padding:.7rem .9rem;"><div class="ac-check">✓</div><div class="ac-text">Weekly drill routine for all shift personnel</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="blk rv">
+    <div class="blk-label">Incident Response Flow</div>
+    <div class="flow">
+      <div class="fstep"><div class="ftime"><div class="ftime-t">Step 1</div></div><div class="fcenter"><div class="fdot">👁</div><div class="fline"></div></div><div class="fcard"><div class="fcard-title">Incident Detection</div><ul class="fcard-list"><li>Duty officer identifies incident from information sources</li><li>Baseline data collected: who, what, when</li></ul></div></div>
+      <div class="fstep"><div class="ftime"><div class="ftime-t">Step 2</div></div><div class="fcenter"><div class="fdot">⚡</div><div class="fline"></div></div><div class="fcard"><div class="fcard-title">Alert Officer & Confirm Data</div><ul class="fcard-list"><li>Duty officer alerts on-call officer</li><li>Confirmed: incident nature, time, expected response timeline</li></ul></div></div>
+      <div class="fstep"><div class="ftime"><div class="ftime-t">Step 3</div></div><div class="fcenter"><div class="fdot">📢</div><div class="fline"></div></div><div class="fcard"><div class="fcard-title">Senior Leadership Update</div><ul class="fcard-list"><li>Initial briefing call with collected data</li><li>Situation report + expected timeline</li></ul></div></div>
+      <div class="fstep"><div class="ftime"><div class="ftime-t">Step 4</div></div><div class="fcenter"><div class="fdot">🤝</div><div class="fline"></div></div><div class="fcard"><div class="fcard-title">External Contact</div><ul class="fcard-list"><li>Reach out to responsible parties for additional intel</li><li>If unavailable — escalate to pre-defined alternate channel</li></ul></div></div>
+      <div class="fstep"><div class="ftime"><div class="ftime-t">Step 5</div></div><div class="fcenter"><div class="fdot">🔄</div><div class="fline"></div></div><div class="fcard"><div class="fcard-title">Ongoing Monitoring & Updates</div><ul class="fcard-list"><li>Track developments — not on a fixed cycle, based on situation</li><li>Every material change passed to officer and leadership</li></ul></div></div>
+      <div class="fstep last"><div class="ftime"><div class="ftime-t">Step 6</div></div><div class="fcenter"><div class="fdot">✅</div></div><div class="fcard"><div class="fcard-title">Incident Closure</div><ul class="fcard-list"><li>Closure only upon commander's explicit authorization</li><li>Summary documented for future after-action review</li></ul></div></div>
+    </div>
+  </div>
+
+  <div class="blk rv">
+    <div class="blk-label">After-Action Review Framework</div>
+    <p style="font-size:.85rem;color:var(--tm);margin-bottom:1rem;line-height:1.7;">Every incident — positive or negative — went through a structured debrief:</p>
+    <div class="pb-step"><div class="pb-num">1</div><div><div class="pb-title">What happened?</div><div class="pb-desc">Description of the incident as it unfolded — timeline, actors involved, actual outcome.</div></div></div>
+    <div class="pb-step"><div class="pb-num">2</div><div><div class="pb-title">What should have happened?</div><div class="pb-desc">The standard / SOP that was supposed to be followed. What was the expected outcome.</div></div></div>
+    <div class="pb-step"><div class="pb-num">3</div><div><div class="pb-title">Findings</div><div class="pb-desc">Gaps between expected and actual — both positive and negative.</div></div></div>
+    <div class="pb-step"><div class="pb-num">4</div><div><div class="pb-title">Root Cause Analysis</div><div class="pb-desc">What caused the gaps? Human, process, or technology failure?</div></div></div>
+    <div class="pb-step"><div class="pb-num">5</div><div><div class="pb-title">Lessons Learned</div><div class="pb-desc">What can be extracted from this incident to improve future performance.</div></div></div>
+    <div class="pb-step"><div class="pb-num">6</div><div><div class="pb-title">Recommendations</div><div class="pb-desc">Concrete actions to execute — who does what, by when.</div></div></div>
+  </div>
+
+  <div class="blk rv">
+    <div class="blk-label">Outcome</div>
+    <div class="outcome-box">
+      <p class="outcome-text">The command center moved from intuition-based reporting to a shared language with defined processes. The team shifted from a reactive posture — responding to incidents — to one that identifies patterns before they escalate into crises.</p>
+    </div>
+  </div>
+</div>
+
+<div class="sdiv"></div>
+
+<!-- ══════════════ S3 ══════════════ -->
+<div class="psec" id="s3">
+  <div class="sec-hdr rv">
+    <div class="sec-big">03</div>
+    <div>
+      <div class="sec-eyebrow">2023–2024</div>
+      <div class="sec-title">Deputy Intelligence Officerr</div>
+      <div class="sec-role">Real-Time Execution · Crisis Management · 4–6 Direct Reports</div>
+    </div>
+  </div>
+
+  <div class="blk rv">
+    <div class="blk-label">Nature of the Role</div>
+    <p class="blk-text">Unlike the two previous roles focused on building, the Deputy Commander role was operational in nature — keeping the system running under pressure. Every delay, every failure, every logistical gap landed on the desk. One objective: ensure the commander never has to think about an operational detail.</p>
+  </div>
+
+  <div class="blk rv">
+    <div class="blk-label">Playbook — Emergency Activation at Zero Notice</div>
+    <p style="font-size:.85rem;color:var(--tm);margin-bottom:1rem;line-height:1.7;">Scenario: immediate order to transition from routine operations to full emergency — no preparation time.</p>
+    <div class="pb-step"><div class="pb-num">1</div><div><div class="pb-title">Receive the Order</div><div class="pb-desc">Receive the transition order. No time for questions — immediate execution begins.</div></div></div>
+    <div class="pb-step"><div class="pb-num">2</div><div><div class="pb-title">Stand Up the War Room</div><div class="pb-desc">Build the physical space from scratch — equipment, systems, communications. Each component checked by priority.</div><div class="pb-note">Priority order: communications → information systems → logistics</div></div></div>
+    <div class="pb-step"><div class="pb-num">3</div><div><div class="pb-title">Systems Readiness Check</div><div class="pb-desc">Verify all critical systems are operational. Identify failures and activate backup procedures as needed.</div></div></div>
+    <div class="pb-step"><div class="pb-num">4</div><div><div class="pb-title">Resource Allocation</div><div class="pb-desc">Prioritize personnel and resources by criticality. Ensure every station is staffed with qualified personnel.</div></div></div>
+    <div class="pb-step"><div class="pb-num">5</div><div><div class="pb-title">Commander Briefing</div><div class="pb-desc">Deliver a full situation report — what's working, what isn't, what's being handled. The commander focuses on mission, not operations.</div></div></div>
+  </div>
+
+  <div class="blk rv">
+    <div class="blk-label">Guiding Principle</div>
+    <div class="outcome-box">
+      <p class="outcome-text">The Deputy's job is not to build — it's to keep what was built working when things break. Every decision is measured by one question: can the commander stay focused on the mission?</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <span>Elad Shiron · Work Portfolio · 2021–2024</span>
+  <span>Industrial Engineering & Information Systems · Bar-Ilan University</span>
+</footer>
+
+<script>
+var obs=new IntersectionObserver(function(en){en.forEach(function(e,i){if(e.isIntersecting){setTimeout(function(){e.target.classList.add('vis');},i*80);obs.unobserve(e.target);}});},{threshold:.06});
+document.querySelectorAll('.rv').forEach(function(el){obs.observe(el);});
+</script>
+</body>
+</html>
